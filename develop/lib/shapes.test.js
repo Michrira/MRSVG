@@ -1,56 +1,49 @@
-//TODO: Import required classes to run tests
+const { Shape, Circle, Square, Triangle } = require('./shapes');
 
-describe("Circle", () => {
-  test("should render svg for a green circle element", () => {
-    const expectedSvg = '<circle cx="150" cy="100" r="80" fill="green" />';
-    const circle = new Circle();
-    circle.setColor("green");
-    const actualSvg = circle.render();
-    expect(actualSvg).toEqual(expectedSvg);
+describe('Shape', () => {
+  test('render method should throw an error when called', () => {
+    const shape = new Shape();
+    expect(() => shape.render()).toThrow('render method is not implemented');
   });
-  test("should accept a fillColor param", () => {
-    const expectedSvg = '<circle cx="150" cy="100" r="80" fill="blue" />';
-    const circle = new Circle();
-    circle.setColor("blue");
-    const actualSvg = circle.render();
-    expect(actualSvg).toEqual(expectedSvg);
+
+  test('setColor method should set the color of the shape', () => {
+    const shape = new Shape();
+    shape.setColor('red');
+    expect(shape.color).toBe('red');
   });
 });
 
-describe("Triangle", () => {
-  test("should render svg for a green polygon element", () => {
-    const expectedSvg =
-      '<polygon points="150, 18 244, 182 56, 182" fill="bisque" />';
+describe('Circle', () => {
+  test('render method should return a valid SVG circle element', () => {
+    const circle = new Circle(50);
+    expect(circle.render()).toBe('<circle cx="0" cy="0" r="50" fill="none" stroke="black"/>');
+  });
+
+  test('setColor method should set the color of the circle', () => {
+    const circle = new Circle(50);
+    circle.setColor('blue');
+    expect(circle.color).toBe('blue');
+  });
+});
+
+describe('Square', () => {
+  test('render method should return a valid SVG rect element', () => {
+    const square = new Square(100);
+    expect(square.render()).toBe('<rect x="-50" y="-50" width="100" height="100" fill="none" stroke="black"/>');
+  });
+
+  test('setColor method should set the color of the square', () => {
+    const square = new Square(100);
+    square.setColor('green');
+    expect(square.color).toBe('green');
+  });
+});
+
+describe('Triangle', () => {
+  test('render method should return a valid SVG polygon element', () => {
     const triangle = new Triangle();
-    triangle.setColor("bisque");
-    const actualSvg = triangle.render();
-    expect(actualSvg).toEqual(expectedSvg);
+    expect(triangle.render()).toBe('<polygon points="0,-50 43.3,25 -43.3,25" fill="none" stroke="black"/>');
   });
-  test("should accept a fillColor param", () => {
-    const expectedSvg =
-      '<polygon points="150, 18 244, 182 56, 182" fill="purple" />';
-    const triangle = new Triangle();
-    triangle.setColor("purple");
-    const actualSvg = triangle.render();
-    expect(actualSvg).toEqual(expectedSvg);
-  });
-});
 
-describe("Square", () => {
-  test("should render svg for a green polygon element", () => {
-    const expectedSvg =
-      '<rect x="90" y="40" width="120" height="120" fill="dodgerblue" />';
-    const square = new Square();
-    square.setColor("dodgerblue");
-    const actualSvg = square.render();
-    expect(actualSvg).toEqual(expectedSvg);
-  });
-  test("should accept a fillColor param", () => {
-    const expectedSvg =
-      '<rect x="90" y="40" width="120" height="120" fill="red" />';
-    const square = new Square();
-    square.setColor("red");
-    const actualSvg = square.render();
-    expect(actualSvg).toEqual(expectedSvg);
-  });
-});
+  test('setColor method should set the color of the triangle', () => {
+    const triangle = new Triangle

@@ -1,22 +1,15 @@
-class SVG {
-    constructor(width, height) {
-    this.width = width;
-    this.height = height;
-    this.shapes = [];
+export class SVG {
+    constructor(shapes = []) {
+      this.shapes = shapes;
     }
-
+  
     addShape(shape) {
-    this.shapes.push(shape);
+      this.shapes.push(shape);
     }
-
-    toString() {
-    let result = `<svg width="${this.width}" height="${this.height}">\n`;
-    for (const shape of this.shapes) {
-        result += `  ${shape.toString()}\n`;
+  
+    render() {
+      const svgShapes = this.shapes.map(shape => shape.render()).join('\n');
+      return `<svg width="300" height="300">\n${svgShapes}\n</svg>`;
     }
-    result += `</svg>`;
-    return result;
-    }
-}
-
-module.exports = SVG;
+  }
+  

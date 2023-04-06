@@ -1,4 +1,7 @@
 // Import required classes
+import { SVG } from './svg.js';
+import { Circle, Square, Triangle } from './shapes.js';
+
 const { Triangle, Circle, Square } = require("./shapes");
 
 // Create new instances of each shape

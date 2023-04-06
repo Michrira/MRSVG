@@ -1,42 +1,27 @@
-//TODO: Import required classes to run tests
+import { SVG } from './svg';
 
-test("should render a 300 x 200 svg element", () => {
-  const expectedSvg =
-    '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg"></svg>';
-  const svg = new SVG();
-  expect(svg.render()).toEqual(expectedSvg);
-});
+describe('SVG', () => {
+  let svg;
 
-test("should append text element", () => {
-  const expectedSvg =
-    '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg"><text x="150" y="125" font-size="60" text-anchor="middle" fill="white">A</text></svg>';
-  const svg = new SVG();
-  svg.setText("A", "white");
-  expect(svg.render()).toEqual(expectedSvg);
-});
+  beforeEach(() => {
+    svg = new SVG(300, 300);
+  });
 
-test("should set text message and color", () => {
-  const expectedSvg =
-    '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg"><text x="150" y="125" font-size="60" text-anchor="middle" fill="#333">SVG</text></svg>';
-  const svg = new SVG();
-  svg.setText("SVG", "#333");
-  expect(svg.render()).toEqual(expectedSvg);
-});
+  describe('constructor', () => {
+    it('should create an instance of SVG', () => {
+      expect(svg).toBeInstanceOf(SVG);
+    });
 
-// An exception test checks for code that should throw an error.
-test("should throw if text exceeds 3 characters", () => {
-  const expectedError = new Error("Text must not exceed 3 characters.");
-  const svg = new SVG();
-  expect(() => svg.setText("HELLO", "#333")).toThrow(expectedError);
-});
+    it('should set the width and height properties', () => {
+      expect(svg.width).toBe(300);
+      expect(svg.height).toBe(300);
+    });
+  });
 
-test("should include a shape", () => {
-  const expectedSvg =
-    '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg"><rect x="90" y="40" width="120" height="120" fill="dodgerblue" /><text x="150" y="125" font-size="60" text-anchor="middle" fill="#333">SVG</text></svg>';
-  const svg = new SVG();
-  svg.setText("SVG", "#333");
-  const square = new Square();
-  square.setColor("dodgerblue");
-  svg.setShape(square);
-  expect(svg.render()).toEqual(expectedSvg);
+  describe('render', () => {
+    it('should return a string with the SVG tag and the correct dimensions', () => {
+      const expected = '<svg width="300" height="300"></svg>';
+      expect(svg.render()).toBe(expected);
+    });
+  });
 });

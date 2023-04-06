@@ -1,38 +1,43 @@
-class Shape {
-  constructor(name, sides = []) {
-    this.name = name;
-    this.sides = sides;
+export class Shape {
+  constructor() {
+    if (new.target === Shape) {
+      throw new TypeError("Cannot construct Shape instances directly.");
+    }
   }
 
-  perimeter() {
-    return this.sides.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  setColor(color) {
+    this.color = color;
+  }
+
+  render() {
+    throw new Error("Method not implemented.");
   }
 }
 
-class Square extends Shape {
+export class Triangle extends Shape {
+  render() {
+    return `<polygon points="100,50 50,150 150,150" style="fill:${this.color};" />`;
+  }
+}
+
+export class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+
+  render() {
+    return `<circle cx="150" cy="150" r="${this.radius}" style="fill:${this.color};" />`;
+  }
+}
+
+export class Square extends Shape {
   constructor(sideLength) {
-    super("square", [sideLength, sideLength, sideLength, sideLength]);
+    super();
     this.sideLength = sideLength;
   }
 
-  area() {
-    return this.sideLength ** 2;
+  render() {
+    return `<rect x="50" y="50" width="${this.sideLength}" height="${this.sideLength}" style="fill:${this.color};" />`;
   }
 }
-
-class Triangle extends Shape {
-  constructor(sideA, sideB, sideC) {
-    super("triangle", [sideA, sideB, sideC]);
-  }
-
-  area() {
-    const s = this.perimeter() / 2;
-    return Math.sqrt(s * (s - this.sides[0]) * (s - this.sides[1]) * (s - this.sides[2]));
-  }
-}
-
-module.exports = {
-  Shape,
-  Square,
-  Triangle
-};
