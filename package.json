@@ -1,27 +1,26 @@
 {
   "name": "MRSVG",
+  "description": "An SVG logo maker",
   "version": "1.0.0",
-  "description": "A project for creating SVG shapes",
   "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
   "scripts": {
     "test": "jest"
   },
   "keywords": [
     "SVG",
-    "shapes"
+    "logo",
+    "maker"
   ],
   "author": "Your Name",
   "license": "MIT",
-  "dependencies": {
-    "jest": "^27.0.6"
+  "devDependencies": {
+    "jest": "^29.5.0"
   },
-  "jest": {
-    "moduleFileExtensions": ["js", "json"],
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "moduleNameMapper": {
-      "\\.(svg)$": "<rootDir>/__mocks__/fileMock.js"
-    }
+  "dependencies": {
+    "inquirer": "^8.2.4"
   }
 }
